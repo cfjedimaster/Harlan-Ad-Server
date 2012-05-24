@@ -68,7 +68,7 @@
 		<cfelse>
 			<cfset aBean = application.adDAO.read(url.id)>
 			<cfif aBean.getID() neq url.id>
-				<cflocation url="ads.cfm" addToken="false">
+				<cflocation url="ads.cfm?msg=error:::Invaild ad." addToken="false">
 			</cfif>		
 			<cfset aBean.setUpdated(now())>
 		</cfif>
@@ -92,7 +92,7 @@
 				<cfelse>
 					<cfset aBean = application.adDAO.update(aBean)>
 				</cfif>
-				<cflocation url="ads.cfm" addToken="false">
+				<cflocation url="ads.cfm?msg=success:::Ad details saved successfully." addToken="false">
 		<cfelse>
 			<cfset errormsg = arrayToList(errors,"<br>")>
 		</cfif>
@@ -105,7 +105,7 @@
 <cfif url.id neq "">
 	<cfset ad = application.adDAO.read(url.id)>
 	<cfif url.id neq ad.getID()>
-		<cflocation url="ads.cfm" addToken="false">
+		<cflocation url="ads.cfm?msg=error:::Invaild ad." addToken="false">
 	</cfif>
 	<cfparam name="form.clientidfk" default="#ad.getClientIDFK()#">
 	<cfparam name="form.name" default="#ad.getName()#">
@@ -151,7 +151,7 @@
 	}
 	</script>
 	<cfif isDefined("errormsg")>
-	<p class="error">#errormsg#</p>
+		<div class="alert alert-error"><b>#errormsg#</b></div>
 	</cfif>
 	<p>
 	
@@ -163,11 +163,11 @@
 	<table>
 		<tr>
 			<td><label for="name">Name:</label></td>
-			<td><input type="text" id="name" name="name" value="#form.name#"></td>
+			<td><input type="text" id="name" name="name" value="#form.name#" class="required"></td>
 		</tr>	
 		<tr>
 			<td>&nbsp;</td>
-			<td><input type="checkbox" name="active" id="active" <cfif form.active>checked</cfif> value="true"> <label for="active">Active</label></td>
+			<td><label class="checkbox" for="active"><input type="checkbox" name="active" id="active" <cfif form.active>checked</cfif> value="true"> Active</label></td>
 		</tr>
 		<tr>
 			<td><label for="clientidfk">Client:</label></td>
@@ -182,7 +182,7 @@
 		
 		<tr>
 			<td><label for="url">URL:</label></td>
-			<td><input type="text" id="url" name="url" value="#form.url#"></td>
+			<td><input type="text" id="url" name="url" value="#form.url#" class="required url"></td>
 		</tr>	
 		<tr>
 			<td><label for="target">Target:</label></td>
@@ -190,7 +190,7 @@
 		</tr>	
 		<tr>
 			<td><label for="adwidth"><nobr>Dimensions (WxH):</nobr></label></td>
-			<td><input type="text" id="adwidth" name="adwidth" value="#form.adwidth#" size="3">x<input type="text" id="adheight" name="adheight" value="#form.adheight#" size="3"></td>
+			<td><input type="text" id="adwidth" name="adwidth" value="#form.adwidth#" class="span1 number">x<input type="text" id="adheight" name="adheight" value="#form.adheight#" class="span1 number"></td>
 		</tr>	
 		<tr>
 			<td>&nbsp;</td>
@@ -254,7 +254,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-			<label for="body">Body:</label><br>
+			<label for="body">Body:</label>
 			<textarea name="body" id="body" cols="50" rows="5">#form.body#</textarea>
 			</td>
 		</tr>
@@ -270,19 +270,21 @@
 	<table>
 		<tr>
 			<td colspan="2">
-			<label for="body">HTML:</label><br>
+			<label for="body">HTML:</label>
 			<textarea name="html" id="html" cols="50" rows="5">#form.html#</textarea>
 			</td>
 		</tr>
 	</table>
 	</fieldset>
 	</p>
-	
 	<p>
-	<input type="submit" name="return" value="Return to Ads">
-	<input type="submit" name="save" value="Save">
-	</form>
+	<div class="form-actions">
+	<input type="submit" class="btn" name="return" value="Return to Ads">
+	<input type="submit" class="btn btn-primary" name="save" value="Save">
+	</div>
 	</p>
+	</form>
+	
 	
 	<cfif len(url.id)>
 	<p>

@@ -87,6 +87,8 @@
 					<cfset roles = application.userManager.getGroupsForUser(session.userBean.getID())>
 					<cfset showLogin = false>
 					<cfloginuser name="#form.username#" password="#form.password#" roles="#roles#">
+				<cfelse>
+					<cfset loginError = "Invalid user details.">	
 				</cfif>
 			</cfif>
 			

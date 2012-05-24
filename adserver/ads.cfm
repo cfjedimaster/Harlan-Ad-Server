@@ -6,7 +6,7 @@
 
 <cfif isDefined("url.deleteAd")>
 	<cfset application.adDAO.delete(url.deleteAd)>
-	<cflocation url="ads.cfm" addToken="false">
+	<cflocation url="ads.cfm?msg=success:::delete successfully." addToken="false">
 </cfif>
 
 <cfif isDefined("url.resetStats")>
@@ -25,36 +25,49 @@
 
 <cfoutput>
 <h2>Ads</h2>
-
+<p class="row">
+	<a href="ad_edit.cfm" class="btn btn-success pull-right">
+		<i class="icon-plus icon-white">
+		</i>
+		New Ad
+	</a>
+</p>
 <cfif ads.recordCount>
-	<table class="mainTable">
-		<tr>
-			<th>Name</th>
-			<th>Impressions</th>
-			<th>Clicks</th>
-			<th>Active</th>
-			<th>Updated</th>
-			<td>&nbsp;</td>
-		</tr>
-		<cfloop query="ads">
-			<tr valign="top">
-				<td><a href="ad_edit.cfm?id=#id#">#name#</a><br/>#clientname#</td>
-				<td>#numberFormat(impressions)#</td>
-				<td>#numberFormat(clicks)#</td>
-				<td>#yesNoFormat(active)#</td>
-				<td>#dateFormat(updated,"short")# #timeFormat(updated,"short")#</td>
-				<td><a href="ads.cfm?deleteAd=#id#">Delete</a> / <a href="ads.cfm?resetStats=#id#">Reset</a></td>
+	<table <!---class="mainTable"---> class="table table-striped table-bordered table-condensed tablesorter">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Impressions</th>
+				<th>Clicks</th>
+				<th>Active</th>
+				<th>Updated</th>
+				<th class="nosort">&nbsp;</th>
 			</tr>
-		</cfloop>
+		</thead>
+		<tbody>
+			<cfloop query="ads">
+				<tr valign="top">
+					<td><a href="ad_edit.cfm?id=#id#">#name#</a><br/>#clientname#</td>
+					<td>#numberFormat(impressions)#</td>
+					<td>#numberFormat(clicks)#</td>
+					<td>#yesNoFormat(active)#</td>
+					<td>#dateFormat(updated,"short")# #timeFormat(updated,"short")#</td>
+					<td width="150px">
+						<a href="ad_edit.cfm?id=#id#" class="icon-pencil" rel="tooltip" title="Edit ad"></a> &nbsp; &nbsp;| &nbsp; &nbsp; 
+						<a class="icon-trash" href="javascript:void(0);"  rel="tooltip" title="Delete ad" onclick="javascript:confirmDelete('ads.cfm?deleteAd=#id#')"> </a> &nbsp; &nbsp;| &nbsp; &nbsp; 
+						<a href="ads.cfm?resetStats=#id#" class="icon-refresh" rel="tooltip" title="Reset ad"></a></td>
+				</tr>
+			</cfloop>
+		</tbody>
 	</table>
 <cfelse>
-	<p>
-		There are no ads defined yet.
+	<p class="alert alert-error">
+		<i class="icon-white icon-warning-sign"></i><strong> There are no ads defined yet.</strong>
 	</p>
 </cfif>
-<p>
+<!---<p>
 <a href="ad_edit.cfm">New Ad</a>
-</p>
+</p>--->
 
 </p>
 </cfoutput>
