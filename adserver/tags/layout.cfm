@@ -42,11 +42,11 @@ content="text/html; charset=windows-1252" />
 			<a class="brand" href="index.cfm">#application.title#</a>
 			<ul class="nav pull-right">
 				<li><a href="index.cfm">Home</a></li>
-				<li><a href="clients.cfm">clients</a></li>
-				<li><a href="ads.cfm">ads</a></li>
-				<li><a href="campaigns.cfm">campaigns</a></li>
-				<li><a href="reports.cfm">reports</a></li>
-				<li><a href="users.cfm">users</a></li>
+				<li><a href="clients.cfm">Clients</a></li>
+				<li><a href="ads.cfm">Ads</a></li>
+				<li><a href="campaigns.cfm">Campaigns</a></li>
+				<li><a href="reports.cfm">Reports</a></li>
+				<li><a href="users.cfm">Users</a></li>
 				<li><a href="index.cfm?logout=1">Logout</a></li>
 			</ul>
 		</div> <!--- container --->

@@ -1,5 +1,5 @@
 LICENSE 
-Copyright 2006-2011 Raymond Camden
+Copyright 2006-2012 Raymond Camden
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -16,6 +16,10 @@ Copyright 2006-2011 Raymond Camden
    
 If you find this application worthy, I have a Amazon wish list set up (www.amazon.com/o/registry/2TCL1D08EZEYE ). Gifts are always welcome. ;)
 Install directions may be found in harlan.doc/pdf.
+
+Last Updated: May 24, 2012 (Version 2.1)
+Major UI update by Saravanamuthu Jeyaraj. Uses Bootstrap FTW!
+All files pretty much.
 
 Last Updated: October 25, 2011 (Version 2)
 Most files updates to remove Flash Forms. 

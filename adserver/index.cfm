@@ -15,7 +15,7 @@ campaigns. Reporting options allow you to see how well your ads, clients, and ca
 </p>
 
 <p>
-The latest updates and the issue tracker may be found at RIAForge: <a href="http://harlan.riaforge.org/">http://harlan.riaforge.org/</a>
+Harlan was created by <a href="http://www.raymondcamden.com">Raymond Camden</a>. The latest updates and the issue tracker may be found at RIAForge: <a href="http://harlan.riaforge.org/">http://harlan.riaforge.org/</a>
 </p>
 </cfoutput>
 
