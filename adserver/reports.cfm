@@ -17,7 +17,7 @@ campaigns. Reporting options allow you to see how well your ads, clients, and ca
 
 <cfset campaigns = application.campaignManager.getCampaigns()>
 <p>
-<form action="reports_campaigns.cfm" method="post">
+<form action="reports_campaigns.cfm" method="post" class="well">
 <fieldset title="Campaigns">
 <legend>Campaigns</legend>
 <p>
@@ -46,14 +46,14 @@ as ads scheduled to them. The Excel report is more of a simple summary of campag
 			</select>
 			</td>
 		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td><input type="submit" value="Generate Report"></td>
-		</tr>	
 	</table>
+	<div class="form-actions">
+		<input type="submit" class="btn" value="Generate Report">
+	</div>
 <cfelse>
-	<p>
-	Sorry, but you do not have any campaigns to report on.
+	<p class="alert alert-error">
+		<i class="icon-white icon-warning-sign"></i><strong> 
+	Sorry, but you do not have any campaigns to report on.</strong> 
 	</p>
 </cfif>
 </fieldset>
@@ -62,7 +62,7 @@ as ads scheduled to them. The Excel report is more of a simple summary of campag
 
 <cfset ads = application.adManager.getAds()>
 <p>
-<form action="reports_ads.cfm" method="post">
+<form action="reports_ads.cfm" method="post" class="well">
 <fieldset title="Ads">
 <legend>Ads</legend>
 <p>
@@ -90,15 +90,15 @@ ad specified.
 			<option value="excel">Excel</option>
 			</select>
 			</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td><input type="submit" value="Generate Report"></td>
 		</tr>	
 	</table>
+	<div class="form-actions">
+		<input type="submit" class="btn" value="Generate Report">
+	</div>
 <cfelse>
-	<p>
-	Sorry, but you do not have any ads to report on.
+	<p class="alert alert-error">
+		<i class="icon-white icon-warning-sign"></i><strong> 
+	Sorry, but you do not have any ads to report on.</strong> 
 	</p>
 </cfif>
 </fieldset>
@@ -107,7 +107,7 @@ ad specified.
 
 <cfset clients = application.clientManager.getClients()>
 <p>
-<form action="reports_clients.cfm" method="post">
+<form action="reports_clients.cfm" method="post" class="well">
 <fieldset title="Clients">
 <legend>Clients</legend>
 <p>
@@ -136,14 +136,14 @@ client specified.
 			</select>
 			</td>
 		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td><input type="submit" value="Generate Report"></td>
-		</tr>	
 	</table>
+	<div class="form-actions">
+		<input type="submit" class="btn" value="Generate Report">
+	</div>
 <cfelse>
-	<p>
-	Sorry, but you do not have any clients to report on.
+	<p class="alert alert-error">
+		<i class="icon-white icon-warning-sign"></i><strong> 
+	Sorry, but you do not have any clients to report on.</strong> 
 	</p>
 </cfif>
 </fieldset>

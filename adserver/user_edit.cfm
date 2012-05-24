@@ -23,14 +23,14 @@
 			<cfif arrayLen(errors) is 0>
 				<cfset uBean = application.userDAO.create(uBean)>
 				<cfset application.userManager.setGroupsForUser(uBean.getID(),form.groups)>
-				<cflocation url="users.cfm" addToken="false">
+				<cflocation url="users.cfm?msg=success:::User details added successfully." addToken="false">
 			<cfelse>
 				<cfset errormsg = arrayToList(errors,"<br>")>
 			</cfif>
 		<cfelse>
 			<cfset uBean = application.userDAO.read(url.id)>
 			<cfif uBean.getID() neq url.id>
-				<cflocation url="users.cfm" addToken="false">
+				<cflocation url="users.cfm?msg=error:::Invaild user account." addToken="false">
 			</cfif>
 			<cfset uBean.setName(form.name)>
 			<cfset uBean.setEmailAddress(form.emailaddress)>
@@ -41,7 +41,7 @@
 			<cfif arrayLen(errors) is 0>
 				<cfset uBean = application.userDAO.update(uBean)>
 				<cfset application.userManager.setGroupsForUser(uBean.getID(),form.groups)>
-				<cflocation url="users.cfm" addToken="false">
+				<cflocation url="users.cfm?msg=success:::User details updated successfully." addToken="false">
 			<cfelse>
 				<cfset errormsg = arrayToList(errors,"<br>")>
 			</cfif>
@@ -55,7 +55,7 @@
 <cfif url.id neq "">
 	<cfset u = application.userDAO.read(url.id)>
 	<cfif url.id neq u.getID()>
-		<cflocation url="users.cfm" addToken="false">
+		<cflocation url="users.cfm?msg=error:::Invaild user account." addToken="false">
 	</cfif>
 	<cfparam name="form.username" default="#u.getUsername()#">
 	<cfparam name="form.name" default="#u.getName()#">
@@ -80,7 +80,7 @@
 <cfoutput>
 <h2>User Edit</h2>
 <cfif isDefined("errormsg")>
-<p class="error">#errormsg#</p>
+<div class="alert alert-error"><b>#errormsg#</b></div>
 </cfif>
 <p>
 
@@ -92,19 +92,19 @@
 <table>
 	<tr>
 		<td><label for="username">Username:</label></td>
-		<td><input type="text" id="username" name="username" value="#form.username#"></td>
+		<td><input type="text" id="username" name="username" value="#form.username#" class="required alphanumeric"></td>
 	</tr>	
 	<tr>
 		<td><label for="name">Name:</label></td>
-		<td><input type="text" id="name" name="name" value="#form.name#"></td>
+		<td><input type="text" id="name" name="name" value="#form.name#" class="required"></td>
 	</tr>	
 	<tr>
 		<td><label for="email">Email Address:</label></td>
-		<td><input type="text" id="email" name="emailaddress" value="#form.emailaddress#"></td>
+		<td><input type="text" id="email" name="emailaddress" value="#form.emailaddress#" class="required email"></td>
 	</tr>	
 	<tr>
 		<td><label for="password">Password:</label></td>
-		<td><input type="text" id="password" name="password" value="#form.password#"></td>
+		<td><input type="text" id="password" name="password" value="#form.password#" class="required"></td>
 	</tr>	
 </table>
 </fieldset>
@@ -131,12 +131,14 @@ a member of the admin group.
 </table>
 </fieldset>
 </p>
-
+<div class="form-actions">
 <p>
-<input type="submit" name="return" value="Return to Users">
-<input type="submit" name="save" value="Save">
-</form>
+<input type="submit" class="btn" name="return" value="Return to Users">
+<input type="submit" class="btn btn-primary" name="save" value="Save">
 </p>
+</div>
+</form>
+
 </cfoutput>
 
 </cfmodule>

@@ -222,7 +222,7 @@
 			<cfelse>
 				<cfset cBean = application.campaignDAO.read(url.id)>
 				<cfif cBean.getID() neq url.id>
-					<cflocation url="campaigns.cfm" addToken="false">
+					<cflocation url="campaigns.cfm?msg=error:::Invaild campaign." addToken="false">
 				</cfif>
 				<cfset cBean.setName(form.name)>
 				<cfset cBean.setActive(form.active)>
@@ -232,7 +232,7 @@
 				<cfif arrayLen(errors) is 0>
 					<cfset cBean = application.campaignDAO.update(cBean)>
 					<cfset url.id = cBean.getID()>
-					<cflocation url="campaigns.cfm" addToken="false">
+					<cflocation url="campaigns.cfm?msg=success:::Campaign details updated successfully." addToken="false">
 				<cfelse>
 					<cfset errormsg = arrayToList(errors,"<br>")>
 				</cfif>
@@ -247,7 +247,7 @@
 <cfif url.id neq "">
 	<cfset campaign = application.campaignDAO.read(url.id)>
 	<cfif url.id neq campaign.getID()>
-		<cflocation url="campaigns.cfm" addToken="false">
+		<cflocation url="campaigns.cfm?msg=error:::Invaild campaign." addToken="false">
 	</cfif>
 	<cfparam name="form.name" default="#campaign.getName()#">
 	<!--- any form submission? --->
@@ -280,7 +280,7 @@
 
 	<cfoutput>
 	<cfif isDefined("errormsg") and len(errormsg)>
-	<p class="error">#errormsg#</p>
+	<div class="alert alert-error"><b>#errormsg#</b></div>
 	</cfif>
 	
 	<form action="#cgi.script_name#?#cgi.query_string#" method="post" name="main" id="main">
@@ -291,11 +291,11 @@
 	<table>
 		<tr>
 			<td><label for="name">Name:</label></td>
-			<td><input type="text" id="name" name="name" value="#form.name#"></td>
+			<td><input type="text" id="name" name="name" value="#form.name#" class="required"></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
-			<td><input type="checkbox" name="active" id="active" <cfif form.active>checked</cfif> value="true"> <label for="active">Active</label></td>
+			<td><label for="active" class="checkbox"><input type="checkbox" name="active" id="active" <cfif form.active>checked</cfif> value="true"> Active</label></td>
 		</tr>
 	</table>
 	</fieldset>
@@ -334,7 +334,7 @@
 			frm.style.display='inline';
 		}
 		</script>
-		<table border="1" width="80%">
+		<table width="80%" class="table table-striped table-bordered table-condensed tablesorter">
 			<tr>
 				<td>Ad</td>
 				<td>Weight</td>
@@ -363,12 +363,14 @@
 				</cfif>
 				&nbsp;</td>
 				<td>
-				<input type="submit" name="deletead" value="Remove" onClick="document.main.deletead_id.value='#id#'"> <input type="button" name="editadbutton" onClick="setForm('#adidfk#','#weight#','#dateFormat(datebegin,"mm/dd/yy")#','#dateFormat(dateend,"mm/dd/yy")#','#timeFormat(timebegin, "h:mm tt")#','#timeFormat(timeend, "h:mm tt")#','#scheduledAds.id#');" value="Edit">
+				<input type="submit" name="deletead" value="Remove" onClick="document.main.deletead_id.value='#id#'"> 
+				<input type="button" name="editadbutton" onClick="setForm('#adidfk#','#weight#','#dateFormat(datebegin,"mm/dd/yy")#','#dateFormat(dateend,"mm/dd/yy")#','#timeFormat(timebegin, "h:mm tt")#','#timeFormat(timeend, "h:mm tt")#','#scheduledAds.id#');" value="Edit">
 				<!---
 				Will be done later.
 				<input type="submit" name="moveup" value="Move Up" onClick="document.main.ad_id.value='#id#'" <cfif currentRow is 1>disabled</cfif>>
 				<input type="submit" name="movedown" value="Move Down" onClick="document.main.ad_id.value='#id#'" <cfif currentRow is recordCount>disabled</cfif>>
 				--->
+				
 				</td>
 			</tr>
 			</cfloop>
@@ -471,7 +473,7 @@
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
-			<td><input type="submit" name="newad" value="Add Scheduled Ad"></td>
+			<td><input type="submit" class="btn" name="newad" value="Add Scheduled Ad"></td>
 		</tr>
 	</table>
 	</fieldset>
@@ -484,16 +486,18 @@
 	</p>
 	
 	</cfif>
-	
+	<div class="form-actions">
 	<p>
 	<table>
 		<tr>
 			<td>&nbsp;</td>
-			<td><input type="submit" name="return" value="Return to Campaigns"> <input type="submit" name="save" value="Save"></td>
+			<td><input type="submit" class="btn" name="return" value="Return to Campaigns"> <input type="submit" class="btn btn-primary" name="save" value="Save"></td>
 		</tr>
 	</table>
-	</form>
 	</p>
+	</div>
+	</form>
+	
 	
 	<cfif len(url.id)>
 	<p>

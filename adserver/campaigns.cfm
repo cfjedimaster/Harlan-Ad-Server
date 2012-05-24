@@ -7,7 +7,7 @@
 
 <cfif isDefined("url.deletecampaign")>
 	<cfset application.campaignDAO.delete(url.deletecampaign)>
-	<cflocation url="campaigns.cfm" addToken="false">
+	<cflocation url="campaigns.cfm?msg=success:::delete successfully." addToken="false">
 </cfif>
 
 <cfif isDefined("url.resetstats")>
@@ -27,37 +27,51 @@
 
 <cfoutput>
 <h2>Campaigns</h2>
-
+<p class="row">
+	<a href="campaign_edit.cfm"" class="btn btn-success pull-right">
+		<i class="icon-plus icon-white">
+		</i>
+		New Campaign
+	</a>
+</p>
 <cfif campaigns.recordCount>
-	<table class="mainTable">
-		<tr>
-			<th>Name</th>
-			<th>Impressions</th>
-			<th>Clicks</th>
-			<th>Active</th>
-			<th>Updated</th>
-			<td>&nbsp;</td>
-		</tr>
-		<cfloop query="campaigns">
-			<tr valign="top">
-				<td><a href="campaign_edit.cfm?id=#id#">#name#</a></td>
-				<td>#numberFormat(impressions)#</td>
-				<td>#numberFormat(clicks)#</td>
-				<td>#yesNoFormat(active)#</td>
-				<td>#dateFormat(updated,"short")# #timeFormat(updated,"short")#</td>
-				<td><a href="campaigns.cfm?deleteCampaign=#id#">Delete</a> / <a href="campaigns.cfm?resetStats=#id#">Reset</a></td>
+	<table <!---class="mainTable"---> class="table table-striped table-bordered table-condensed tablesorter">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Impressions</th>
+				<th>Clicks</th>
+				<th>Active</th>
+				<th>Updated</th>
+				<th class="nosort">&nbsp;</th>
 			</tr>
-		</cfloop>
+		</thead>
+		<tbody>
+			<cfloop query="campaigns">
+				<tr valign="top">
+					<td><a href="campaign_edit.cfm?id=#id#">#name#</a></td>
+					<td>#numberFormat(impressions)#</td>
+					<td>#numberFormat(clicks)#</td>
+					<td>#yesNoFormat(active)#</td>
+					<td>#dateFormat(updated,"short")# #timeFormat(updated,"short")#</td>
+					<td width="150px">
+						<a href="campaign_edit.cfm?id=#id#"  rel="tooltip" title="Edit campaign" class="icon-pencil"></a> &nbsp; &nbsp;| &nbsp; &nbsp;
+						<a class="icon-trash"  rel="tooltip" title="Delete campaign" href="javascript:void(0);" onclick="javascript:confirmDelete('campaigns.cfm?deleteCampaign=#id#')"></a> &nbsp; &nbsp;| &nbsp; &nbsp; 
+						<a href="campaigns.cfm?resetStats=#id#" class="icon-refresh"  rel="tooltip" title="Reset campaign"></a>
+					</td>
+				</tr>
+			</cfloop>
+		</tbody>
 	</table>
 <cfelse>
-	<p>
-		There are no campaigns defined yet.
+	<p class="alert alert-error">
+		<i class="icon-white icon-warning-sign"></i><strong> There are no campaigns defined yet.</strong>
 	</p>
 </cfif>
 
-<p>
+<!---<p>
 <a href="campaign_edit.cfm">New Campaign</a>
-</p>
+</p>--->
 
 </cfoutput>
 
