@@ -29,7 +29,7 @@
 	
 	<p>
 	<h3>General Stats</h3>
-	<table border="1" width="100%">
+	<table class="table table-striped table-bordered table-condensed">
 	<tr>
 		<td><b>Campaign</b></td><td><b>Impressions / Clicks / CTR</b></td><td><b>First / Last Impression</b></td><td><b>First / Last Click</b></td>
 	</tr>
@@ -56,7 +56,7 @@
 		<cfoutput>
 		<p>
 		<h3>Ad Stats: #stats[c].name#</h3>
-		<table border="1" width="100%">
+		<table class="table table-striped table-bordered table-condensed">
 		<tr>
 			<td><b>Name</b></td><td><b>Impressions / Clicks / CTR</b></td>
 		</tr>	
@@ -90,7 +90,7 @@
 
 	<cfoutput>
 	</p>
-	<p>
+	<p class="well">
 	</cfoutput>
 	
 	<cfchart show3d=true chartwidth="#chartWidth#" chartheight="#chartHeight#" backgroundColor="##eff7e0" showLegend="#multiple#" title="Impressions Over Time">
@@ -103,7 +103,7 @@
 	<cfoutput>
 	</p>
 	
-	<p>
+	<p class="well">
 	</cfoutput>
 
 	<cfchart show3d=true chartwidth="#chartWidth#" chartheight="#chartHeight#" backgroundColor="##eff7e0" showLegend="#multiple#" title="Clicks Over Time">
@@ -116,7 +116,7 @@
 	<cfoutput>
 	</p>
 	
-	<p>
+	<p class="well">
 	</cfoutput>	
 
 	<cfchart show3d=true chartwidth="#chartWidth#" chartheight="#chartHeight#" backgroundColor="##eff7e0" showLegend="#multiple#" title="Impressions By Hour">
@@ -129,7 +129,7 @@
 	<cfoutput>
 	</p>
 
-	<p>
+	<p class="well">
 	</cfoutput>
 
 	<cfchart show3d=true chartwidth="#chartWidth#" chartheight="#chartHeight#" backgroundColor="##eff7e0" showLegend="#multiple#" title="Clicks By Hour">
@@ -151,7 +151,7 @@
 	<cfheader name="content-disposition" value="attachment;filename=campaign_report.xls">  
 
 	<cfoutput>
-	<table border="1" width="100%">
+	<table class="table table-striped table-bordered table-condensed">
 	<tr bgcolor="yellow">
 		<td><b>Campaign</b></td><td><b>Impressions</b></td><td><b>Clicks</b><td><b>CTR</b></td><td><b>First Impression</b></td><td><b>Last Impression</b></td><td><b>First Click</b></td><td><b>Last Click</b></td>
 	</tr>
